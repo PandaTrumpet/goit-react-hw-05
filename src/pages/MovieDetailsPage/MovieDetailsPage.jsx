@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import Spinner from "../../components/Spinner/Spinner";
 import { Link, Outlet, useLocation } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { getMoviesId } from "../../movies-api";
@@ -6,14 +7,21 @@ import Genres from "../../components/Genres/Genres";
 import { Suspense } from "react";
 export default function MovieDetailsPage() {
   const [dataMovie, setDataMivie] = useState({});
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
   const { moviesId } = useParams();
   const genres = dataMovie.genres;
   useEffect(() => {
     async function fetchMovie() {
       try {
+        setLoading(true);
         const data = await getMoviesId(moviesId);
         setDataMivie(data);
-      } catch (error) {}
+      } catch (error) {
+        setError(true);
+      } finally {
+        setLoading(false);
+      }
     }
     fetchMovie();
   }, [moviesId]);
@@ -24,6 +32,7 @@ export default function MovieDetailsPage() {
       <div>
         <Link to={backLinkURL.current}>Go back</Link>
       </div>
+      {loading && <Spinner />}
       <div>
         <div>
           <img
@@ -38,6 +47,7 @@ export default function MovieDetailsPage() {
         <p>{dataMovie.overview}</p>
         {genres && <Genres data={dataMovie} />}
       </div>
+      {error && <p>Error....</p>}
       <p>Additional information</p>
       <ul>
         <li>
