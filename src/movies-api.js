@@ -65,7 +65,7 @@ export const getActors = async (moviesId) => {
   };
 
   const response = await axios.request(options);
-  // console.log(response.data.cast);
+  console.log(response.data.cast);
   return response.data.cast;
 };
 

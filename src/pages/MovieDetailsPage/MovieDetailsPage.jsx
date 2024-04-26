@@ -3,8 +3,7 @@ import { Link, Outlet } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { getMoviesId } from "../../movies-api";
 import Genres from "../../components/Genres/Genres";
-// import MovieReviews from "../../components/MovieReviews/MovieReviews";
-// import MovieCast from "../../components/MovieCast/MovieCast";
+
 export default function MovieDetailsPage() {
   const [dataMovie, setDataMivie] = useState({});
   const { moviesId } = useParams();
@@ -18,10 +17,9 @@ export default function MovieDetailsPage() {
     }
     fetchMovie();
   }, [moviesId]);
-  // const genres = { dataMovie.genres };
+
   return (
     <div>
-      {/* <p>Movie id- {moviesId}</p> */}
       <div>
         <div>
           <img
@@ -36,6 +34,7 @@ export default function MovieDetailsPage() {
         <p>{dataMovie.overview}</p>
         {genres && <Genres data={dataMovie} />}
       </div>
+      <p>Additional information</p>
       <ul>
         <li>
           <Link to="cast">Cast</Link>

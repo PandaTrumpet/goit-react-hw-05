@@ -27,6 +27,7 @@ export default function MovieCast() {
                   alt=""
                 />
                 <p>{el.name}</p>
+                <p>Character: {el.character}</p>
               </li>
             );
           })}
