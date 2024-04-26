@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
-import { Link, Outlet } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
+import { Link, Outlet, useLocation } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { getMoviesId } from "../../movies-api";
 import Genres from "../../components/Genres/Genres";
-
+import { Suspense } from "react";
 export default function MovieDetailsPage() {
   const [dataMovie, setDataMivie] = useState({});
   const { moviesId } = useParams();
@@ -17,14 +17,18 @@ export default function MovieDetailsPage() {
     }
     fetchMovie();
   }, [moviesId]);
-
+  const location = useLocation();
+  const backLinkURL = useRef(location.state) ?? "/movies";
   return (
     <div>
+      <div>
+        <Link to={backLinkURL.current}>Go back</Link>
+      </div>
       <div>
         <div>
           <img
             src={`https://image.tmdb.org/t/p/w500${dataMovie.backdrop_path}`}
-            alt=""
+            alt={`Photo of film ${dataMovie.title}`}
           />
         </div>
         <h2>{dataMovie.title}</h2>
@@ -43,7 +47,9 @@ export default function MovieDetailsPage() {
           <Link to="reviews">Reviews</Link>
         </li>
       </ul>
-      <Outlet />
+      <Suspense fallback={<p>The page is loading...</p>}>
+        <Outlet />
+      </Suspense>
     </div>
   );
 }

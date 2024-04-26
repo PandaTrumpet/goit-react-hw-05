@@ -37,7 +37,6 @@ export const searchMovies = async (moviesName) => {
 
 export const getMoviesId = async (moviesId) => {
   const options = {
-    method: "GET",
     url: `https://api.themoviedb.org/3/movie/${moviesId}`,
     params: { language: "en-US" },
     headers: {
@@ -48,13 +47,12 @@ export const getMoviesId = async (moviesId) => {
   };
 
   const response = await axios.request(options);
-
+  console.log(response.data);
   return response.data;
 };
 
 export const getActors = async (moviesId) => {
   const options = {
-    method: "GET",
     url: `https://api.themoviedb.org/3/movie/${moviesId}/credits`,
     params: { language: "en-US" },
     headers: {
@@ -71,7 +69,6 @@ export const getActors = async (moviesId) => {
 
 export const getReviews = async (moviesId) => {
   const options = {
-    method: "GET",
     url: `https://api.themoviedb.org/3/movie/${moviesId}/reviews`,
     params: { language: "en-US", page: "1" },
     headers: {
