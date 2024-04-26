@@ -1,3 +1,4 @@
+import css from "./MovieReviews.module.css";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getReviews } from "../../movies-api";
@@ -26,18 +27,18 @@ export default function MovieReviews() {
     <div>
       {loading && <Spinner />}
       {error && <p>Error....</p>}
-      <ul>
+      <ul className={css.reviewsList}>
         {reviews.length > 0 ? (
           reviews.map((el) => {
             return (
               <li key={el.id}>
-                <h3>Author: {el.author}</h3>
-                <p>{el.content}</p>
+                <h3 className={css.authorName}>Author: {el.author}</h3>
+                <p className={css.text}>{el.content}</p>
               </li>
             );
           })
         ) : (
-          <p>Ther is no reviews </p>
+          <p>We don't have any reviews for this movie.</p>
         )}
       </ul>
     </div>

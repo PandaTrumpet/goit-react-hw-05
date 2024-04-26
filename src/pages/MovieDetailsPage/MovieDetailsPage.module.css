@@ -1,0 +1,24 @@
+.back {
+  display: flex;
+  align-content: center;
+  gap: 3px;
+  margin-top: 5px;
+}
+.pageContainer {
+  display: flex;
+  align-items: center;
+  padding: 8px;
+}
+.informContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 8px;
+}
+.addInfo {
+  margin-bottom: 8px;
+}
+
+.list {
+  margin-left: 20px;
+}

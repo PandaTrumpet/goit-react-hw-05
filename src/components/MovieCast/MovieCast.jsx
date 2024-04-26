@@ -1,3 +1,4 @@
+import css from "./MovieCast.module.css";
 import { getActors } from "../../movies-api";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
@@ -34,8 +35,10 @@ export default function MovieCast() {
                   src={`https://image.tmdb.org/t/p/w200${el.profile_path}`}
                   alt=""
                 />
-                <p>{el.name}</p>
-                <p>Character: {el.character}</p>
+                <h3 className={css.actorName}>{el.name}</h3>
+                <p className={css.actorCharacter}>
+                  <b>Character:</b> {el.character}
+                </p>
               </li>
             );
           })}

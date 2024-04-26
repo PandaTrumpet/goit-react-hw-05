@@ -1,0 +1,8 @@
+.genreList {
+  display: flex;
+  gap: 8px;
+}
+.genreItem {
+  list-style: none;
+  list-style-type: none;
+}

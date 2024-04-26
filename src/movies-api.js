@@ -12,7 +12,7 @@ export const findMovie = async () => {
   };
 
   const response = await axios.request(options);
-  console.log(response.data.results);
+  // console.log(response.data.results);
   return response.data.results;
 };
 
@@ -31,7 +31,7 @@ export const searchMovies = async (moviesName) => {
     },
   };
   const response = await axios.request(options);
-  console.log(response.data);
+  // console.log(response.data);
   return response.data.results;
 };
 
@@ -47,7 +47,7 @@ export const getMoviesId = async (moviesId) => {
   };
 
   const response = await axios.request(options);
-  console.log(response.data);
+  // console.log(response.data);
   return response.data;
 };
 
@@ -63,7 +63,7 @@ export const getActors = async (moviesId) => {
   };
 
   const response = await axios.request(options);
-  console.log(response.data.cast);
+  // console.log(response.data.cast);
   return response.data.cast;
 };
 
@@ -79,6 +79,6 @@ export const getReviews = async (moviesId) => {
   };
 
   const response = await axios.request(options);
-  console.log(response.data.results);
+  // console.log(response.data.results);
   return response.data.results;
 };
