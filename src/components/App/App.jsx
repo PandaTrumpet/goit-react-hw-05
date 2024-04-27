@@ -19,7 +19,7 @@ const MovieReviews = lazy(() =>
 import "./App.css";
 import { findMovie } from "../../movies-api/";
 function App() {
-  findMovie();
+  // findMovie();
   return (
     <Layout>
       <Routes>

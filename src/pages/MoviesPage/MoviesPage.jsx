@@ -1,37 +1,54 @@
 import { useState, useEffect } from "react";
 import MovieList from "../../components/MovieList/MovieList";
 import { searchMovies } from "../../movies-api";
+import { useSearchParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 export default function MoviesPage() {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
-  const [query, setQuery] = useState("");
+  const [queryName, setQuery] = useState("");
+  const [searchParams, setSearchParams] = useSearchParams();
+  const queryParam = searchParams.get("query") ?? "";
 
-  async function fetchSearchMovies(nameMovie) {
-    try {
-      setLoading(true);
-      const data = await searchMovies(nameMovie);
-      setMovies(data);
-    } catch (error) {
-      setError(true);
-    } finally {
-      setLoading(false);
+  const changeFilter = (newFilter) => {
+    searchParams.set("query", newFilter);
+    setSearchParams({
+      query: newFilter,
+    });
+  };
+  const location = useLocation();
+  useEffect(() => {
+    async function fetchSearchMovies() {
+      try {
+        setLoading(true);
+        const data = await searchMovies(queryName);
+        setMovies(data);
+      } catch (error) {
+        setError(true);
+      } finally {
+        setLoading(false);
+      }
     }
-  }
-
+    fetchSearchMovies();
+  }, [queryName]);
   const handleSubmit = (e) => {
     e.preventDefault();
     const form = e.target;
     const nameMovie = form.elements.search.value;
-    // console.log(nameMovie);
-    fetchSearchMovies(nameMovie);
-    // searchMovies();
+
+    setQuery(nameMovie);
+
     form.reset();
   };
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <input type="text" name="search" />
+        <input
+          type="text"
+          name="search"
+          onChange={(e) => changeFilter(e.target.value)}
+        />
         <button type="submit">Search</button>
       </form>
       {movies.length > 0 && <MovieList movies={movies} />}
