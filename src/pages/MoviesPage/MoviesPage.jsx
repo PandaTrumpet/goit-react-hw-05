@@ -7,7 +7,7 @@ export default function MoviesPage() {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
-  const [queryName, setQuery] = useState("");
+  // const [queryName, setQuery] = useState("");
   const [searchParams, setSearchParams] = useSearchParams();
   const queryParam = searchParams.get("query") ?? "";
 
@@ -17,7 +17,7 @@ export default function MoviesPage() {
     async function fetchSearchMovies() {
       try {
         setLoading(true);
-        const data = await searchMovies(queryName);
+        const data = await searchMovies(queryParam);
         setMovies(data);
       } catch (error) {
         setError(true);
@@ -26,14 +26,14 @@ export default function MoviesPage() {
       }
     }
     fetchSearchMovies();
-  }, [queryName]);
+  }, [queryParam]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const form = e.target;
     const nameMovie = form.elements.search.value;
     setSearchParams({ query: nameMovie });
-    setQuery(nameMovie);
+    // setQuery(nameMovie);
 
     form.reset();
   };

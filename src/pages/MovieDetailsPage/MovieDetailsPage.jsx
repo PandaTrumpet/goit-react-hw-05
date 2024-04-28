@@ -47,8 +47,9 @@ export default function MovieDetailsPage() {
       <div className={css.pageContainer}>
         <div>
           <img
-            src={mainPhotoURL ?? defaultImg}
+            src={defaultImg && mainPhotoURL}
             alt={`Photo of film ${dataMovie.title}`}
+            width={300}
           />
         </div>
         <div className={css.informContainer}>
