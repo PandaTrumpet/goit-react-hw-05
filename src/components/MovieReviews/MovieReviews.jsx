@@ -10,6 +10,7 @@ export default function MovieReviews() {
   const [error, setError] = useState(false);
   useEffect(() => {
     async function getFetchReviews() {
+      if (!moviesId) return;
       try {
         setLoading(true);
         const data = await getReviews(moviesId);

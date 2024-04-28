@@ -11,13 +11,8 @@ export default function MoviesPage() {
   const [searchParams, setSearchParams] = useSearchParams();
   const queryParam = searchParams.get("query") ?? "";
 
-  const changeFilter = (newFilter) => {
-    searchParams.set("query", newFilter);
-    setSearchParams({
-      query: newFilter,
-    });
-  };
   const location = useLocation();
+
   useEffect(() => {
     async function fetchSearchMovies() {
       try {
@@ -32,11 +27,12 @@ export default function MoviesPage() {
     }
     fetchSearchMovies();
   }, [queryName]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const form = e.target;
     const nameMovie = form.elements.search.value;
-
+    setSearchParams({ query: nameMovie });
     setQuery(nameMovie);
 
     form.reset();
@@ -44,11 +40,7 @@ export default function MoviesPage() {
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          name="search"
-          onChange={(e) => changeFilter(e.target.value)}
-        />
+        <input type="text" name="search" />
         <button type="submit">Search</button>
       </form>
       {movies.length > 0 && <MovieList movies={movies} />}
