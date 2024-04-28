@@ -23,9 +23,9 @@ export default function MovieCast() {
     }
     fetchGetActorc();
   }, [moviesId]);
-  // const defaultImg =
-  //   "https://dl-media.viber.com/10/share/2/long/vibes/icon/image/0x0/95e0/5688fdffb84ff8bed4240bcf3ec5ac81ce591d9fa9558a3a968c630eaba195e0.jpg";
 
+  const defaultImg =
+    "https://dl-media.viber.com/10/share/2/long/vibes/icon/image/0x0/95e0/5688fdffb84ff8bed4240bcf3ec5ac81ce591d9fa9558a3a968c630eaba195e0.jpg";
   return (
     <div>
       {loading && <Spinner />}
@@ -36,7 +36,17 @@ export default function MovieCast() {
             const mainPhotoURL = `https://image.tmdb.org/t/p/w200${el.profile_path}`;
             return (
               <li key={el.id}>
-                <img src={mainPhotoURL} alt={el.name} />
+                {/* <img src={mainPhotoURL} alt={el.name} /> */}
+
+                <img
+                  src={
+                    mainPhotoURL
+                      ? `https://image.tmdb.org/t/p/w500/${el.profile_path}`
+                      : defaultImg
+                  }
+                  width={200}
+                  alt="poster"
+                />
                 <h3 className={css.actorName}>{el.name}</h3>
                 <p className={css.actorCharacter}>
                   <b>Character:</b> {el.character}
